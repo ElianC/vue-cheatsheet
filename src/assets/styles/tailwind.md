@@ -17,8 +17,8 @@ module.exports = {
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 ```
-## 3 Import Css file on main.js (where app is mounted)
+## 3 Import css file on main.js (where app is mounted)
 ```JavaScript
-import './assets/styles/tailwind.scss';
+import './assets/styles/general.scss';
 ```
 ## Finally, we can use tailwind class on html or directly in css with @apply and declarate some classes
