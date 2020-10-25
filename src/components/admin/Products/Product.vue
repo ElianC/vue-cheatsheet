@@ -1,6 +1,6 @@
 <template>
 <router-link to="/admin/products"><i class="iconBack material-icons">arrow_circle_down</i></router-link>
-<img :src="product.photo_url" :alt="product.name">
+{{product.name}}
 </template>
 <script>
 import { ref } from 'vue';
@@ -10,7 +10,7 @@ import { getProduct } from '@/services/api/products';
     setup() {
       let route = useRoute();
       let product = ref({});
-      getProduct(route.params.id).then(res => product.value = res.data[0]);
+      getProduct(route.params.id).then(res => product.value = res.data);
       return {
         product
       }

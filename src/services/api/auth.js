@@ -1,15 +1,14 @@
 import axios from 'axios';
-import {getUsers} from '@/services/api/users';
 export const login = async (user) => {
-  //! Fake login
-  let users = await getUsers();
-  let userDB = users.data.find(el => el.email === user.mail.value);
-  if (userDB && userDB.password === user.password.value) {
-    let {id, username} = userDB;
-    localStorage.setItem('mean-token', JSON.stringify({id, username}));
-    return  userDB;
-  }
-};
+try {
+  let res = await axios.post(`${process.env.VUE_APP_APIURL}/api/login`, user).then(res => res['data']);
+    localStorage.setItem('mean-token', res['token']);
+    return true;
+} catch (error) {
+  return;
+}
+}
+
 export const isLoggedIn = () => {
   return localStorage.getItem('mean-token')!== null ? true: false;
 }

@@ -3,15 +3,14 @@
   <table>
     <thead>
       <tr>
+        <th>Designation</th>
         <th>Nom</th>
-        <th>Prix</th>
-        <th>Actif</th>
+        <th></th>
       </tr>
     </thead>
     <tr v-for="product in products">
+      <td>{{product.pantone_value}}</td>
       <td>{{product.name}}</td>
-      <td>{{product.price}}</td>
-      <td>{{product.active}}</td>
       <td><router-link :to='`/admin/products/${product.id}`'>view<i class="material-icons">chevron_right</i></router-link></td>
     </tr>
   </table>

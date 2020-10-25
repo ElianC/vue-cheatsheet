@@ -46,12 +46,12 @@ export default {
     let regexMail = /\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/;
     let formModel = reactive({
       mail: {
-        value: "mwazo@netline.com",
+        value: "eve.holt@reqres.in",
         dirty: false,
         valid: computed(() => regexMail.test(formModel.mail.value)),
       },
       password: {
-        value: "1188a9ajAU",
+        value: "cityslicka",
         dirty: false,
         valid: computed(() => formModel.password.value !== "" && formModel.password.value.length >6)
       },
@@ -62,7 +62,8 @@ export default {
         valid = formModel[key].valid;
       }
       if (valid) {
-        let res = await login(formModel);
+        let user = {email: formModel.mail.value, password: formModel.password.value};
+        let res = await login(user);
         if (res) {
           router.push(route.query.exceptedPath || '/admin/home')
         } else {
@@ -78,7 +79,6 @@ export default {
 };
 </script>
 <style scoped lang="scss">
-@import "../../assets/styles/buttons";
 form {
   @apply bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4;
   input.invalid {
