@@ -1,12 +1,13 @@
 <template>
 <div class="grid justify-items-stretch">
 
-<table class="table-auto w-3/4 justify-self-center">
+<table class="">
   <thead>
     <tr>
       <th>Nom</th>
       <th>Age</th>
       <th>Adresse mail</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -14,6 +15,7 @@
       <td :key='user.id'>{{user.name}}</td>
       <td >{{user.age}}</td>
       <td >{{user.email}}</td>
+      <td><router-link :to='`/admin/users/${user.id}`'>view <i class="material-icons">chevron_right</i></router-link></td>
     </tr>
   </tbody>
 </table>
@@ -32,14 +34,7 @@ import { getUsers } from '@/services/api/users';
     }
   }
 </script>
-<style lang="scss">
-td {
-  @apply border px-4 py-3;
-}
-tbody tr {
-  &:hover {
-    background-color: whitesmoke;
-    cursor: pointer;
-  }
-}
+<style scoped lang="scss">
+ @import '../../../../src/assets/styles/table';
+
 </style>

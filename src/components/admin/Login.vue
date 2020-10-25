@@ -36,10 +36,12 @@
 </template>
 <script>
 import { login } from "@/services/api/auth";
-import router from '../../router/index';
 import { reactive, ref, computed } from "vue";
+import { useRoute, useRouter } from 'vue-router';
 export default {
   setup() {
+    let route = useRoute();
+    let router = useRouter();
     let datas = ref([]);
     let regexMail = /\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/;
     let formModel = reactive({
@@ -62,7 +64,7 @@ export default {
       if (valid) {
         let res = await login(formModel);
         if (res) {
-          router.push('/admin/home')
+          router.push(route.query.exceptedPath || '/admin/home')
         } else {
           alert(`Adresse Mail ou mot de passe incorrect`)
         }
@@ -75,7 +77,7 @@ export default {
   },
 };
 </script>
-<style lang="scss">
+<style scoped lang="scss">
 @import "../../assets/styles/buttons";
 form {
   @apply bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4;

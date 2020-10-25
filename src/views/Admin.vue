@@ -1,12 +1,31 @@
 <template>
-  <router-view/>
+<section class="container flex">
+  <aside>
+    <Aside />
+  </aside>
+  <main>
+    <router-view />
+  </main>
+</section>
 </template>
 
 <script>
-import Login from "@/components/admin/Login.vue";
+import Aside from '@/components/admin/Aside.vue';
 export default {
   components: {
-    Login
+    Aside,
   }
 }
 </script>
+<style scoped lang="scss">
+.container {
+  height: 100%;
+  width: 100%;
+}
+main {
+  width: 100%;
+}
+aside{
+  width: 300px;
+}
+</style>

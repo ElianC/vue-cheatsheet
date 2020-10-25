@@ -18,11 +18,10 @@
 
 #nav {
   padding: 30px;
-
+  background-color: red;
   a {
     font-weight: bold;
     color: #2c3e50;
-
     &.router-link-active {
       color: #42b983;
     }

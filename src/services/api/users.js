@@ -4,5 +4,5 @@ export const getUsers = () => {
   return axios.get(path).then(e=>e);
 }
 export const getUser = (id) => {
-  return axios.get(path+'/'+id).then(e=>e);
+  return axios.get(`${path}/${id}`).then(e=>e);
 }

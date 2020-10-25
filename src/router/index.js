@@ -1,10 +1,13 @@
 import { createRouter, createWebHistory } from 'vue-router';
+import PassThrough from '@/components/PassThrough.vue';
 import Home from '../views/Home.vue';
 import Admin from '@/views/Admin.vue';
 import Login from '@/components/admin/Login.vue';
-import  AdminHome from '@/components/admin/AdminHome.vue';
-import  userList from '@/components/admin/Users/userList.vue';
-
+import AdminHome from '@/components/admin/AdminHome.vue';
+import User from '@/components/admin/Users/User.vue';
+import UsersList from '@/components/admin/Users/UsersList.vue';
+import Product from '@/components/admin/Products/Product.vue';
+import ProductsList from '@/components/admin/Products/ProductsList.vue';
 import { isLoggedIn } from '@/services/api/auth';
 const routes = [
   {
@@ -28,10 +31,14 @@ const routes = [
     path: '/admin',
     name: 'Admin',
     component: Admin,
+    /**
+     * Verify if visitor is connected
+     * (check if mean-token saved on local storage)
+     */
     beforeEnter: (to, from, next) => {
       // reject the navigation
       if (!isLoggedIn()) {
-        next('/login');
+        next({path: '/login', query: {exceptedPath: to.fullPath}});
       } else {
         next()
       }
@@ -47,16 +54,33 @@ const routes = [
       },
       {
         path: 'users',
+        component: PassThrough,
         name: 'Users',
-        component: userList
-        // children: [
-        //   {
-        //     path: '',
-        //     component: userList
-        //   }
-        // ]
+        children: [
+          {
+            path: '',
+            component: UsersList
+          },
+          {
+            path: ':id',
+            component: User
+          }
+        ]
+      },
+      {
+        path: 'products',
+        component: PassThrough,
+        children: [
+          {
+            path: '',
+            component: ProductsList
+          },
+          {
+            path: ':id',
+            component: Product,
+          }
+        ]
       }
-
     ]
   }
 ]
